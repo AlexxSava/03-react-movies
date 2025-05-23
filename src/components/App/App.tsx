@@ -1,19 +1,21 @@
-import css from "./App.module.css";
-import { fetchMovies } from "../../services/movieService";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
-import type { Movie } from "../../types/movies";
-import { useState } from "react";
 import MovieModal from "../MovieModal/MovieModal";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { fetchMovies } from "../../services/movieService";
+import type { Movie } from "../../types/movies";
+import css from "./App.module.css";
+
+
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const handleSearch = async (query: string) => {
     if (!query.trim()) {
