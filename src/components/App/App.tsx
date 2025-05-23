@@ -35,8 +35,8 @@ export default function App() {
       }
 
       setMovies(data.results);
-    } catch (err) {
-      console.error("Search error:", err);
+    } catch (error) {
+      console.error("Search error:", error);
       setIsError(true);
     } finally {
       setIsLoading(false);
