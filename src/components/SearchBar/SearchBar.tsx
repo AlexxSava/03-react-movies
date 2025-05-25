@@ -10,12 +10,14 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
     const [query, setQuery] = useState("");
 function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const trimmedQuery = query.trim();
-        if (!trimmedQuery) {
+        const form = e.currentTarget;
+    const formData = new FormData(form);
+    const value = (formData.get("query") as string).trim();
+        if (!value) {
             toast.error("Please enter your search query.");
             return;
         }
-        onSubmit(trimmedQuery);
+        onSubmit(value);
         setQuery("");
     }
     return (
